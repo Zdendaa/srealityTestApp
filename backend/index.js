@@ -23,6 +23,10 @@ app.get('/getData', async (req, res) => {
     res.status(200).json(data);
 });
 
+app.get('/', async (req, res) => {
+    res.status(200).send("Hello, backend is working");
+});
+
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });

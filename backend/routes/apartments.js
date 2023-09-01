@@ -46,13 +46,15 @@ router.post("/addApartments", async (req, res) => {
 router.get("/getAllApartments", async (req, res) => {
     try {
         client.query(`SELECT * FROM apartment_data`, (err, result) => {
-            const modifiedData = result.rows.map(item => {
-                return {
-                    title: item.title,
-                    imageUrl: item.image_url, // Change the key name
-                };
-            });
-            res.status(200).json(modifiedData);
+            if (result) {
+                const modifiedData = result.rows.map(item => {
+                    return {
+                        title: item.title,
+                        imageUrl: item.image_url, // Change the key name
+                    };
+                });
+                res.status(200).json(modifiedData);
+            }
         });
     } catch (err) {
         res.status(500).json(err);

@@ -1,0 +1,37 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: apartments
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ahoj
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - '5432:5432'
+    # volumes:
+    #   # - ./data/pg:/var/lib/postgresql/data/
+    #   - ./sql:/docker-entrypoint-initdb.d
+    # pgadmin:
+    #   image: chorss/docker-pgadmin4
+    #   ports:
+    #     - 5050:5050
+
+  backend:
+    build:
+      context: ./backend
+    depends_on:
+      - db
+    ports:
+      - "5000:5000" # Adjust the port as needed
+    restart: always
+    environment:
+      DB_NAME: apartments
+      DB_USER: postgres
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000" # Adjust the port as needed
