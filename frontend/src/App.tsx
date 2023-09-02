@@ -44,7 +44,7 @@ function App() {
   }
   return (
     <div className="App">
-      <h2>Applikace pro sreality.czasdfasdf</h2>
+      <h2>Applikace pro <a href="https://www.sreality.cz/">sreality.cz</a></h2>
       {
         !loading && <button onClick={setAndInsertApartmentsIntoDB}>aktualizuj apartmany</button>
       }
